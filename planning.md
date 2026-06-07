@@ -101,6 +101,30 @@ My domain is student-written reviews of Computer Science professors at my colleg
      You can use ASCII art, a Mermaid diagram, or embed a sketch as an image.
      You'll use this diagram as context when prompting AI tools to implement each stage. -->
 
+       [ 10 Local Raw Text Files (data/raw/) ]
+                          │
+                          ▼
+                    [ Ingestion ]
+                          │
+                          ▼
+         [ Chunking (500 chars / 100 overlap) ]
+                          │
+                          ▼
+      [ Embedding Model: all-MiniLM-L6-v2 ]
+                          │
+                          ▼
+                [ ChromaDB Vector Store ]
+                          │
+               ┌──────────┴──────────┐
+               ▼                     ▼
+         (User Query) ──> [ Semantic Search ] ──> (Top-5 Chunks)
+                                                     │
+                                                     ▼
+        [ Groq LLM: llama-3.3-70b-versatile ] <──────┘
+                          │
+                          ▼
+                 [ Answer + Source ]
+
 ---
 
 ## AI Tool Plan
@@ -116,7 +140,28 @@ My domain is student-written reviews of Computer Science professors at my colleg
      with my specified chunk size and overlap" is a plan. -->
 
 **Milestone 3 — Ingestion and chunking:**
+AI Tool: ChatGPT (Planning) + Claude (Building)
+
+Input: A descrption of the chunking strategy and parameters along with a description of the raw data.
+
+Expected Output: A python script in the file ingest.py that reads data from the correct directory and breaks that data into overlapping chunks.
+
+Verification: I will print out different chunks of data and see if they match up to the original data.
 
 **Milestone 4 — Embedding and retrieval:**
+AI Tool: ChatGPT (Planning) + Claude (Building)
+
+Input: The Retrieval Approach section details specifying all-MiniLM-L6-v2 and ChromaDB
+
+Expected Output: An embedding generation script that processes our generated text chunks. 
+
+Verification: I will run 3 sample queries directly against the vector database without the LLM, validating that the returned distance scores are mathematically sound (below 0.5) and point to the correct source documents.
 
 **Milestone 5 — Generation and interface:**
+AI Tool: ChatGPT (Planning) + Claude (Building)
+
+Input: The full pipeline specification, the exact Groq model requirement, the strict grounding prompt rules, and the Gradio boilerplate UI code snippet from the prompt instructions.
+
+Expected Output: A main file that takes a user prompt, retrieves relevant vector chunks, injects them into a system prompt that mandates strict document grounding, passes it to the Groq API, extracts the answer text, appends clean markdown source citations, and hooks the runtime loop up to a web-based Gradio app interface.
+
+Verification: I will inputs test questions 1 and 5 from my evaluation suite. I will verify that question 1 generates proper citations and question 5 correctly yields a clean structural refusal instead of an LLM hallucination.
