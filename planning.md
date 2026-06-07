@@ -9,7 +9,7 @@
 
 ## Domain
 
-<!-- What domain did you choose? Why is this knowledge valuable and hard to find through official channels? -->
+My domain is student-written reviews of Computer Science professors at my college, RIT. This knowledge is hard to find otherwise because it's not listed on the official RIT website or documents. This is experience gathered from students which are individual to every professor. This knowledge is valuable because it is written from the experience of a student which is useful to other students compared to material provided by the professor or school. For example, we will be able to figure out which professors are more rigorous, provide more coursework, have better policies, etc.
 
 ---
 
@@ -20,16 +20,16 @@
 
 | # | Source | Description | URL or location |
 |---|--------|-------------|-----------------|
-| 1 | | | |
-| 2 | | | |
-| 3 | | | |
-| 4 | | | |
-| 5 | | | |
-| 6 | | | |
-| 7 | | | |
-| 8 | | | |
-| 9 | | | |
-| 10 | | | |
+| 1 | Rate My Professor | Student-written reviews for Maria Jose Cepeda Garcia | https://www.ratemyprofessors.com/professor/2556028 |
+| 2 | Rate My Professor | Student-written reviews for Sean Strout | https://www.ratemyprofessors.com/professor/127294 |
+| 3 | Rate My Professor | Student-written reviews for Jansen Orfan | https://www.ratemyprofessors.com/professor/2299490 |
+| 4 | Rate My Professor | Student-written reviews for Yuan Liao | https://www.ratemyprofessors.com/professor/2979160 |
+| 5 | Rate My Professor | Student-written reviews for Ting Cao | https://www.ratemyprofessors.com/professor/2585840 |
+| 6 | Rate My Professor | Student-written reviews for Thomas Borrelli | https://www.ratemyprofessors.com/professor/1105257 |
+| 7 | Rate My Professor | Student-written reviews for Abeer Ahmad | https://www.ratemyprofessors.com/professor/2954361 |
+| 8 | Rate My Professor | Student-written reviews for Arthur Nunes | https://www.ratemyprofessors.com/professor/1037287 |
+| 9 | Rate My Professor | Student-written reviews for Xumin Liu | https://www.ratemyprofessors.com/professor/1410469 |
+| 10 | Rate My Professor | Student-written reviews for Mohan Kumar | https://www.ratemyprofessors.com/professor/2094090 |
 
 ---
 
@@ -40,11 +40,11 @@
      numbers fit the structure of your documents.
      A review-heavy corpus warrants different chunking than a long FAQ. -->
 
-**Chunk size:**
+**Chunk size:** 500
 
-**Overlap:**
+**Overlap:** 100
 
-**Reasoning:**
+**Reasoning:** Rate My Professor reviews are usually short and on average it seems like they are around 300 characters in length. However, we also need to take into account other information that comes along with the review such as the class, attendance, 'would take again', grade, and textbook answers. We also want to take into account the fact that we may cut off reviews in the middle which is why I decided to go for 100 characters of overlap.
 
 ---
 
@@ -56,11 +56,11 @@
      would you weigh in choosing a different embedding model — context length, multilingual
      support, accuracy on domain-specific text, latency? -->
 
-**Embedding model:**
+**Embedding model:** all-MiniLM-L6-v2 via sentence-transformers
 
-**Top-k:**
+**Top-k:** 5
 
-**Production tradeoff reflection:**
+**Production tradeoff reflection:** Although all-MiniLM-L6-v2 is a very fast and efficient model, it is not as powerful as the other models out there. It might misunderstand some language that is used by students in reviews. In production, we may want to choose a more powerful model but this might increase latency.
 
 ---
 
@@ -73,11 +73,11 @@
 
 | # | Question | Expected answer |
 |---|----------|-----------------|
-| 1 | | |
-| 2 | | |
-| 3 | | |
-| 4 | | |
-| 5 | | |
+| 1 | How strict are Maria Cepeda's deadline policies? | She is very strict about these policies and there are almost always no extensions. |
+| 2 | What does Jansen Orfan do for students who are struggling in his class? | Jansen has many resources to help students who are struggling. He is very helpful during office hours and gives students many extra credit opportunities. |
+| 3 | What are some complaints and praises of Thomas Borelli's teaching style? | He is very energetic and makes the class exciting. However, many students say that his lecture is absolutely mandatory. |
+| 4 | As someone who may not go to class often, what is something I should watch out for if I take Abeer Ahmad? | Although Abeer's lectures are highly reviewed, many students say that he doesn't post lecture materials often and takes long to respond to emails. |
+| 5 | As someone who takes notes during lectures to succeed, what is one thing that I should be worried about when taking Yuan Liao? | One thing you should watch out for is that many students say his lectures are very boring. |
 
 ---
 
@@ -87,9 +87,9 @@
      Consider: noisy or inconsistent documents, missing source attribution, off-topic
      retrieval, chunks that split key information across boundaries. -->
 
-1.
+1. **Overlapping Courses:** Professors teach multiple courses which means multiple professors may teach the same course. If a student asks about a specific course and doesn't mention the professor, the answer they get may not be exactly what they're looking for if they have a specific professor in mind already.
 
-2.
+2. **Not Enough Context:** There are dozens of reviews per professor and bad reviews may be overshadowed by good reviews and vice versa.
 
 ---
 
