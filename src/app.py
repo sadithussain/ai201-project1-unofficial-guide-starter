@@ -21,6 +21,13 @@ def generate_answer(query: str) -> tuple[str, str]:
 
     # 2. Format the chunks into a single string for the LLM to read
     context_text = "\n\n---\n\n".join(retrieved_chunks)
+
+    # ADD THIS TO PRINT TO YOUR TERMINAL:
+    print("\n" + "="*40)
+    print("🔍 RETRIEVED CHUNKS FOR VIDEO DEMO:")
+    print("="*40)
+    print(context_text)
+    print("="*40 + "\n")
     
     # 3. Extract unique professor names to cite our sources
     sources = set()
